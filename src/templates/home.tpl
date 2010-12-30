@@ -172,8 +172,8 @@
             to extend your Nuxeo platform or application!
           </li>
           <li>
-            Or learn how to <a href="https://doc.nuxeo.com/display/KB/Configuring+Nuxeo+Debian+or+Ubuntu+repositories">install Nuxeo DM on Debian/Ubuntu</a>,
-            <!--or how to build the platform <a href="">from the sources</a> -->
+            Learn how to <a href="https://doc.nuxeo.com/display/KB/Configuring+Nuxeo+Debian+or+Ubuntu+repositories">install Nuxeo DM on Debian/Ubuntu</a>,
+            or how to build the platform <a href="https://doc.nuxeo.com/display/KB/Working+with+Nuxeo+EP+source+code">from the sources</a>
           </li>
         </ul>
       </div>
@@ -215,7 +215,7 @@
           </li>
           <li>
             Look at the outstanding issues and tasks in the <a href="http://jira.nuxeo.org/">Jira issue tracker</a> and
-            contribute to the <a href="https://jira.nuxeo.org/browse/NXP?report=com.atlassian.jira.plugin.system.project:roadmap-panel">roadmap</a>.
+            contribute to the <a href="https://jira.nuxeo.org/browse/NXP?report=com.atlassian.jira.plugin.system.project:roadmap-panel">roadmap</a>
           </li>
           <li>
             Check out the <a href="https://doc.nuxeo.com/display/CORG/Getting+the+Nuxeo+source+code">Source
