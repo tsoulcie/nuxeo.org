@@ -174,7 +174,7 @@
     </div>
     
     <div class="solutions">
-      <h3>Nuxeo solutions and services</h3>
+      <h3>Nuxeo Solutions and Services</h3>
 
       <div class="list">
         <ul>
