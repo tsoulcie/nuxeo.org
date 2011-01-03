@@ -6,10 +6,8 @@ from datetime import datetime
 from flask import *
 from werkzeug.contrib.atom import AtomFeed
 
-from persistence import *
-import plugins
+from models import Event, Session
 
-plugins.init()
 
 # Constants (might go into a config file)
 MAX_EVENTS = 20
@@ -28,8 +26,7 @@ app = Flask(__name__, static_path='/media')
 
 @app.before_request
 def connect_db():
-    g.db = get_db_connection()
-    g.pm = get_pm()
+    g.session = Session()
     g.age = age
 
 
@@ -48,11 +45,7 @@ def home():
     return response
 
 def get_events():
-    c = g.db.cursor()
-    c.execute("""select * from event
-                 order by created desc limit %s""" % MAX_EVENTS)
-    events = [ g.pm.revive(c, row) for row in c.fetchall() ]
-    # TODO: add some filtering and shit
+    events = g.session.query(Event).order_by(Event.created.desc()).limit(MAX_EVENTS)
     return events
 
 

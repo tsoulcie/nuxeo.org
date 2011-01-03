@@ -100,7 +100,7 @@
           <div class="type jira"><img src="/media/icons/{{ event.type }}.png"
                                       alt="{{ event.alt_type }}"/></div>
           <div class="description">
-            <span>{{ event.header() }}</span>
+            <span>{{ event.header }}</span>
             <span class="when">{{ g.age(event.created) }}</span>
 
             <p><a href="{{ event.url }}">{{ event.title }}</a></p>

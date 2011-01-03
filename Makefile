@@ -1,4 +1,4 @@
-.PHONY: test serve crawl run
+.PHONY: test serve crawl run setup-env
 
 test: env data
 	PATH=env/bin:$(PATH) nosetests -v
@@ -15,6 +15,9 @@ crawl: env
 	PATH=env/bin:$(PATH) python src/crawler.py
 
 env:
+	pip install --upgrade -s -E env -r dependencies.txt
+
+setup-env:
 	pip install --upgrade -s -E env -r dependencies.txt
 
 clean:
