@@ -166,8 +166,8 @@
         </ul>
         <ul class="or">
           <li>
-            Or learn how to <a href="https://doc.nuxeo.com/display/KB/Configuring+Nuxeo+Debian+or+Ubuntu+repositories">install Nuxeo DM on Debian/Ubuntu</a>
-            <!--or how to build the platform <a href="">from the sources</a> -->
+            Learn how to <a href="https://doc.nuxeo.com/display/KB/Configuring+Nuxeo+Debian+or+Ubuntu+repositories">install Nuxeo DM on Debian/Ubuntu</a>,
+            or how to build the platform <a href="https://doc.nuxeo.com/display/KB/Working+with+Nuxeo+EP+source+code">from the sources</a>
           </li>
         </ul>
       </div>
@@ -186,10 +186,6 @@
                   class="marketplace"> • </span><span>Market</span>place</a>
             to discover additional packages (add-ons, extensions, business templates)
             to extend your Nuxeo platform or application!
-          </li>
-          <li>
-            Learn how to <a href="https://doc.nuxeo.com/display/KB/Configuring+Nuxeo+Debian+or+Ubuntu+repositories">install Nuxeo DM on Debian/Ubuntu</a>,
-            or how to build the platform <a href="https://doc.nuxeo.com/display/KB/Working+with+Nuxeo+EP+source+code">from the sources</a>
           </li>
           <li>
               Try <a href="https://connect.nuxeo.com/nuxeo/site/connect/trial/form">Nuxeo Studio and Marketplace</a>
