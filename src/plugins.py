@@ -25,7 +25,7 @@ class Event(object):
     def get_title(self):
         pass
 
-    def post_init(self):
+    def post_init(self, entry):
         pass
 
 
@@ -60,7 +60,7 @@ class Feed(Source):
         event.url = entry.link
         event.created = time.mktime(entry.updated_parsed)
         event.author = entry.get("author", "unknown")
-        event.post_init()
+        event.post_init(entry)
         return event
 
 
@@ -91,7 +91,7 @@ class Blogs(Feed):
 class CorpNewsEvent(Event):
     type = "news"
 
-    def post_init(self):
+    def post_init(self, entry):
         self.author = "Nuxeo Corp"
 
     def header(self):
@@ -105,7 +105,7 @@ class CorpNews(Feed):
 class BuzzEvent(Event):
     type = "buzz"
 
-    def post_init(self):
+    def post_init(self, entry):
         self.author = "Nuxeo Corp"
 
     def header(self):
@@ -119,7 +119,7 @@ class Buzz(Feed):
 class ForumEvent(Event):
     type = "forum"
 
-    def post_init(self):
+    def post_init(self, entry):
         m = re.match(r"http://forum.nuxeo.org/\./mv/msg/([0-9]+)/([0-9]+)", self.url)
         tid = int(m.group(1))
         mid = int(m.group(2))
@@ -149,8 +149,13 @@ class Documentation(Feed):
 class JiraEvent(Event):
     type = "jira"
 
+    def post_init(self, entry):
+        print entry.description.encode("latin1", "ignore")
+
     def header(self):
         return "Jira issue change, by %s" % self.author
+
+    
 
 class Jira(Feed):
     feed_url = "http://jira.nuxeo.org/sr/jira.issueviews:searchrequest-rss/10915/SearchRequest-10915.xml?tempMax=10"

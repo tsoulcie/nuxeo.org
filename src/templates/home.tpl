@@ -19,7 +19,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $(".tweet").tweet({
-        username: ["sfermigier", "ebarroca", "ogrisel", "efge", "janezupan", "nuxeo", "nuxeodam"],
+        username: ["sfermigier", "ebarroca", "ogrisel", "efge", "janezupan", "nuxeo", "nuxeodam", "jcarsique"],
         join_text: "auto",
         avatar_size: 32,
         count: 6,
