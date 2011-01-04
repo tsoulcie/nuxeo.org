@@ -24,9 +24,12 @@ class Feed(Source):
 
         events = [ self.make_event(entry) for entry in entries ]
 
+        # TODO: refactor
         for event in events:
-            self.session.add(event)
+            if not self.session.query(Event.uid).filter(Event.uid==event.uid).all():
+                self.session.add(event)
         self.session.commit()
+
 
     def make_event(self, entry):
         event = Event()
@@ -99,7 +102,10 @@ class Forum(Feed):
         tid = int(m.group(1))
         mid = int(m.group(2))
         event.url = "http://forum.nuxeo.org/?t=msg&th=%d&goto=%d&#msg_%d" % (tid, mid, mid)
-        event.header = "New message on the forum, by %s" % (event.author,)
+        if event.title.startswith("Re:"):
+            event.header = "New answer on the forum, by %s" % (event.author,)
+        else:
+            event.header = "New thread on the forum, by %s" % (event.author,)
 
 #
 

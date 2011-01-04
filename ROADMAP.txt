@@ -6,13 +6,17 @@ V. 0.2
 
 Focus: add a few goodies.
 
-- RSS feed
++ Refactor to SQLAlchemy
++ RSS feed
+
+- Better parsing of the events
 
 - Twitter notifications
 - "New since last visit"
 - Archives
 - User activities
 - mod_wsgi deployment
+- Better diffs for Confluence (ˆ la wikipedia)
 
 V. 0.3
 ------
