@@ -55,8 +55,11 @@ def feed():
                     url=request.host_url,
                     subtitle="What's happening now in the Nuxeo community.")
     for event in get_events():
-        # TODO: add content
-        feed.add(event.title, content="", content_type='html',
+        # TODO: Escape strings
+        content = "<p><em>%s:</em></p>" % event.header \
+            + event.content \
+            + "<p><em>URL: <a href='%s'>%s</a></em></p>" % (event.url, event.url)
+        feed.add(event.title, content=content, content_type='text/html',
                  author=event.author, url=event.url, id=event.uid,
                  updated=datetime.utcfromtimestamp(event.created),
                  published=datetime.utcfromtimestamp(event.created))

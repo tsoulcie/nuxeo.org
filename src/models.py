@@ -36,7 +36,7 @@ class Event(Base):
     author = Column(String)
     header = Column(String)
     title = Column(String)
-    #content = Column(String)
+    content = Column(String)
     created = Column(Integer)
 
 Base.metadata.create_all(engine)

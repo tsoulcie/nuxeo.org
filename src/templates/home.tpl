@@ -11,6 +11,8 @@
         type="text/css" media="screen"/>
   <link rel="stylesheet" href="/media/css/dev_center.css" type="text/css"
         media="screen">
+  <link type="application/rss+xml" rel="alternate" href="/rss" title="Nuxeo Community Feed" />
+
 
   <!-- tweet : comes from https://github.com/seaofclouds/tweet/ -->
   <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"

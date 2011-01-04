@@ -3,6 +3,9 @@ import feedparser
 
 from models import Event, Source
 
+# Patch feedparser. Yuck :(
+feedparser._HTMLSanitizer.acceptable_elements += ['style']
+
 #
 # RSS / Atom Feed abstract class
 #
@@ -33,6 +36,12 @@ class Feed(Source):
         event.url = entry.link
         event.created = time.mktime(entry.updated_parsed)
         event.author = entry.get("author", "unknown")
+        if entry.has_key("content"):
+            event.content = entry.content[0].value
+        elif entry.has_key("summary"):
+            event.content = entry.summary
+        else:
+            event.content = ""
         self.post_init(event, entry)
         return event
 
@@ -110,12 +119,10 @@ class Jira(Feed):
     feed_url = "http://jira.nuxeo.org/sr/jira.issueviews:searchrequest-rss/10915/SearchRequest-10915.xml?tempMax=10"
 
     def post_init(self, event, entry):
-        event.content = entry.description
-        entry.description.encode("latin1", "ignore")
         if re.search("&nbsp;Updated: [0-9]{2}/[0-9]{2}/[0-9]{2}", event.content):
-            self.header = "Jira issue change, by %s" % event.author
+            event.header = "Jira issue change, by %s" % event.author
         else:
-            self.header = "New Jira issue, by %s" % event.author
+            event.header = "New Jira issue, by %s" % event.author
 
 #############################################################################
 
