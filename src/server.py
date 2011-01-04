@@ -61,12 +61,17 @@ def feed():
         content = "<p><em>%s:</em></p>" % event.header \
             + event.content \
             + "<p><em>URL: <a href='%s'>%s</a></em></p>" % (event.url, event.url)
-        title = event.type[0].toupper() + event.type[1:] + " - " + event.title
+        title = event.type.capitalize() + " - " + event.title
         feed.add(title=title, content=content, content_type='text/html',
                  author=event.author, url=event.url, id=event.uid,
                  updated=datetime.utcfromtimestamp(event.created),
                  published=datetime.utcfromtimestamp(event.created))
     return feed.get_response()
+
+# Debug
+@app.route('/rss-debug')
+def feed_debug():
+    return feed()
 
 
 def age(t):
