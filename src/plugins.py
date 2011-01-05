@@ -138,4 +138,6 @@ class Jira(Feed):
 
 #############################################################################
 
+# Poor man's plugin registration
+
 all_sources = [Blogs(), Forum(), CorpNews(), Buzz(), Jira(), Documentation()]

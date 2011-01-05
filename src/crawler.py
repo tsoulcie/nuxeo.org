@@ -2,7 +2,6 @@
 
 import plugins
 
-
 class Crawler(object):
 
     def __init__(self):
@@ -10,7 +9,7 @@ class Crawler(object):
 
     def crawl(self):
         for source in self.all_sources:
-            print "Crawling", source
+            #print "Crawling", source
             source.crawl()
 
 
