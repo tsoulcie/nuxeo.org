@@ -1,4 +1,6 @@
+from cgi import escape
 import time, re
+from urllib import quote
 import feedparser
 
 from models import Event, Source
@@ -68,8 +70,9 @@ class Blogs(Feed):
     type = "blogpost"
     feed_url = "http://blogs.nuxeo.com/atom.xml"
 
-    def post_init(self, event, entry):
-        event.header = "New blog post by %s" % event.author
+    def get_header(self, event):
+        return 'New blog post, by <a href="/user/%s">%s</a>' % (
+            quote(event.author), escape(event.author))
 
 #
 
@@ -79,7 +82,9 @@ class CorpNews(Feed):
 
     def post_init(self, event, entry):
         event.author = "Nuxeo Corp"
-        event.header = "New Corporate announcement, on <a href='http://www.nuxeo.com/'>nuxeo.com</a>"
+
+    def get_header(self, event):
+        return "New Corporate announcement, on <a href='http://www.nuxeo.com/'>nuxeo.com</a>"
 
 #
 
@@ -89,7 +94,9 @@ class Buzz(Feed):
 
     def post_init(self, event, entry):
         event.author = "Nuxeo Corp"
-        event.header = "Buzz about us, displayed on <a href='http://www.nuxeo.com/'>nuxeo.com</a>"
+
+    def get_header(self, event):
+        return "Buzz about us, displayed on <a href='http://www.nuxeo.com/'>nuxeo.com</a>"
 
 #
 
@@ -102,10 +109,14 @@ class Forum(Feed):
         tid = int(m.group(1))
         mid = int(m.group(2))
         event.url = "http://forum.nuxeo.org/?t=msg&th=%d&goto=%d&#msg_%d" % (tid, mid, mid)
+
+    def get_header(self, event):
         if event.title.startswith("Re:"):
-            event.header = "New reply on the forum, by %s" % (event.author,)
+            return 'New reply on the forum, by <a href="/user/%s">%s</a>' % (
+                quote(event.author), escape(event.author))
         else:
-            event.header = "New thread on the forum, by %s" % (event.author,)
+            return 'New thread on the forum, by <a href="/user/%s">%s</a>' % (
+                quote(event.author), escape(event.author))
 
 #
 
@@ -115,8 +126,9 @@ class Documentation(Feed):
         "&types=page&types=comment&types=blogpost&types=mail&types=attachment" + \
         "&maxResults=15&publicFeed=true"
 
-    def post_init(self, event, entry):
-        event.header = "Documentation change, by %s" % event.author
+    def get_header(self, event):
+        return 'Documentation change, by <a href="/user/%s">%s</a>' % (
+            quote(event.author), escape(event.author))
 
 #
 
@@ -130,14 +142,29 @@ class Jira(Feed):
             created = m.group(1)
             updated = m.group(2)
             if created == updated:
-                event.header = "New Jira issue, by %s" % event.author
+                event.subtype = "new"
             else:
-                event.header = "Jira issue update, by %s" % event.author
+                event.subtype = "update"
         else:
-            event.header = "Jira issue update, by %s" % event.author
+            event.subtype = "update"
+
+    def get_header(self, event):
+        if event.subtype == 'new':
+            return 'New Jira issue, by <a href="/user/%s">%s</a>' % (
+                quote(event.author), escape(event.author))
+        else:
+            return 'Jira issue update, by <a href="/user/%s">%s</a>' % (
+                quote(event.author), escape(event.author))
 
 #############################################################################
 
 # Poor man's plugin registration
 
 all_sources = [Blogs(), Forum(), CorpNews(), Buzz(), Jira(), Documentation()]
+
+def get_header_for(event):
+    type = event.type.split("/")[0]
+    for source in all_sources:
+        if source.type == type:
+            return source.get_header(event)
+    raise "Unknown source"

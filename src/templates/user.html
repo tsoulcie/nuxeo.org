@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 
-{% block h1 %}Welcome to the Nuxeo Community!{% endblock %}
+{% block h1 %}User activity on the Nuxeo Community sites{% endblock %}
 
 {% block main %}
+<!-- ignore fo now
     <div class="intro">
 
       <p>Nuxeo is an <b>Open Source Platform</b> for <b>Enterprise Content
@@ -13,17 +14,12 @@
         <b>standard</b> Java EE technologies.
       </p>
     </div>
+-->
 
     <div class="feedsBlock">
-      <h2>Recent Community Activity</h2>
+      <h2>Activity for {{ username }} </h2>
 
       <div class="events">
-        <!--
-        <div class="newEvents">
-          <p>3 new events available</p>
-        </div>
-        -->
-
         {% for event in events %}
         <div class="event">
           <div class="type jira"><img src="/media/icons/{{ event.type }}.png"

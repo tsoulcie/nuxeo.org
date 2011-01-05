@@ -29,6 +29,7 @@ def connect_db():
     g.session = Session()
     g.age = age
 
+# REST endpoints
 
 @app.route('/')
 def home():
@@ -44,9 +45,11 @@ def home():
     response.set_cookie('visits', visits, 10*YEAR)
     return response
 
-def get_events():
-    events = g.session.query(Event).order_by(Event.created.desc()).limit(MAX_EVENTS)
-    return events
+@app.route('/user/<username>')
+def user(username):
+    events = get_events(user=username)
+    response = make_response(render_template("user.html", username=username, events=events))
+    return response
 
 
 @app.route('/rss')
@@ -72,6 +75,15 @@ def feed():
 @app.route('/rss-debug')
 def feed_debug():
     return feed()
+
+# Utility functions
+
+def get_events(user=None):
+    query = g.session.query(Event)
+    if user:
+        query = query.filter(Event.author == user)
+    events = query.order_by(Event.created.desc()).limit(MAX_EVENTS)
+    return events
 
 
 def age(t):

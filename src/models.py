@@ -32,11 +32,19 @@ class Event(Base):
 
     uid = Column(String, primary_key=True)
     type = Column(String)
+    subtype = Column(String)
     url = Column(String)
     author = Column(String)
-    header = Column(String)
     title = Column(String)
     content = Column(String)
     created = Column(Integer)
+
+    decorator = None
+
+    def __getattr__(self, name):
+        if name == 'header':
+            import plugins
+            return plugins.get_header_for(self)
+        raise AttributeError
 
 Base.metadata.create_all(engine)

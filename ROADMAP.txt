@@ -9,20 +9,20 @@ Focus: add a few goodies.
 + Refactor to SQLAlchemy
 + RSS feed
 + Better parsing of the events
++ template inheritance (needed for archive and user profiles)
++ User activities
 
-- template inheritance (needed for archive and user profiles)
-
+- Archives
 - Fix twitterfeed notifs
 - "New since last visit"
-- Archives
-- User activities
 - mod_wsgi deployment
 - Better diffs for Confluence (ˆ la wikipedia)
 
 V. 0.3
 ------
 
-- Search
+- User profiles (w/ photo...)
+- Search (federated?)
 - Twitter notifications (currently done by twitterfeed).
 
 DONE

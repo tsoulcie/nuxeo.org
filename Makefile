@@ -29,5 +29,5 @@ superclean: clean
 	rm -rf data/* env
 
 push:
-	rsync -avz -e ssh src Makefile dependencies.txt \
+	rsync -avz -e ssh src Makefile dependencies.txt crawl.sh \
 		nuxeo@styx.nuxeo.com:/var/www/home.nuxeo.org/
