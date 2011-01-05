@@ -103,7 +103,7 @@ class Forum(Feed):
         mid = int(m.group(2))
         event.url = "http://forum.nuxeo.org/?t=msg&th=%d&goto=%d&#msg_%d" % (tid, mid, mid)
         if event.title.startswith("Re:"):
-            event.header = "New answer on the forum, by %s" % (event.author,)
+            event.header = "New reply on the forum, by %s" % (event.author,)
         else:
             event.header = "New thread on the forum, by %s" % (event.author,)
 
@@ -125,10 +125,16 @@ class Jira(Feed):
     feed_url = "http://jira.nuxeo.org/sr/jira.issueviews:searchrequest-rss/10915/SearchRequest-10915.xml?tempMax=10"
 
     def post_init(self, event, entry):
-        if re.search("&nbsp;Updated: [0-9]{2}/[0-9]{2}/[0-9]{2}", event.content):
-            event.header = "Jira issue change, by %s" % event.author
+        m = re.search(r"Created: (.*?)\s*&nbsp;Updated: ([^\s]*)", event.content)
+        if m:
+            created = m.group(1)
+            updated = m.group(2)
+            if created == updated:
+                event.header = "New Jira issue, by %s" % event.author
+            else:
+                event.header = "Jira issue update, by %s" % event.author
         else:
-            event.header = "New Jira issue, by %s" % event.author
+            event.header = "Jira issue update, by %s" % event.author
 
 #############################################################################
 

@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 # SQLAlchemy initialisation
 
 Base = declarative_base()
-engine = create_engine('sqlite:///data/nuxeoorg.db', echo=True)
+engine = create_engine('sqlite:///data/nuxeoorg.db') #, echo=True)
 Session = sessionmaker(bind=engine)
 
 
