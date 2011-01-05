@@ -12,7 +12,7 @@ data:
 run: serve
 
 crawl: env
-	PATH=env/bin:$(PATH) python src/crawler.py
+	./crawl.sh
 
 env:
 	pip install --upgrade -s -E env -r dependencies.txt

@@ -8,10 +8,11 @@ Focus: add a few goodies.
 
 + Refactor to SQLAlchemy
 + RSS feed
++ Better parsing of the events
 
-- Better parsing of the events
+- template inheritance (needed for archive and user profiles)
 
-- Twitter notifications
+- Fix twitterfeed notifs
 - "New since last visit"
 - Archives
 - User activities
@@ -22,6 +23,7 @@ V. 0.3
 ------
 
 - Search
+- Twitter notifications (currently done by twitterfeed).
 
 DONE
 ====

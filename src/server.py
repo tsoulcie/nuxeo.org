@@ -39,7 +39,7 @@ def home():
     is_newbie = visits < 3
 
     events = get_events()
-    response = make_response(render_template("home.tpl", events=events, is_newbie=is_newbie))
+    response = make_response(render_template("home.html", events=events, is_newbie=is_newbie))
 
     response.set_cookie('visits', visits, 10*YEAR)
     return response
