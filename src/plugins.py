@@ -72,7 +72,7 @@ class Blogs(Feed):
 
     def get_header(self, event):
         return 'New blog post, by <a href="/user/%s">%s</a>' % (
-            quote(event.author), escape(event.author))
+            quote(event.author.encode("utf8")), escape(event.author))
 
 #
 
@@ -113,10 +113,10 @@ class Forum(Feed):
     def get_header(self, event):
         if event.title.startswith("Re:"):
             return 'New reply on the forum, by <a href="/user/%s">%s</a>' % (
-                quote(event.author), escape(event.author))
+                quote(event.author.encode("utf8")), escape(event.author))
         else:
             return 'New thread on the forum, by <a href="/user/%s">%s</a>' % (
-                quote(event.author), escape(event.author))
+                quote(event.author.encode("utf8")), escape(event.author))
 
 #
 
@@ -128,7 +128,7 @@ class Documentation(Feed):
 
     def get_header(self, event):
         return 'Documentation change, by <a href="/user/%s">%s</a>' % (
-            quote(event.author), escape(event.author))
+            quote(event.author.encode("utf8")), escape(event.author))
 
 #
 
@@ -151,10 +151,10 @@ class Jira(Feed):
     def get_header(self, event):
         if event.subtype == 'new':
             return 'New Jira issue, by <a href="/user/%s">%s</a>' % (
-                quote(event.author), escape(event.author))
+                quote(event.author.encode("utf8")), escape(event.author))
         else:
             return 'Jira issue update, by <a href="/user/%s">%s</a>' % (
-                quote(event.author), escape(event.author))
+                quote(event.author.encode("utf8")), escape(event.author))
 
 #############################################################################
 
