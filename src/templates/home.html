@@ -29,10 +29,9 @@
           <div class="type jira"><img src="/media/icons/{{ event.type }}.png"
                                       alt="{{ event.alt_type }}"/></div>
           <div class="description">
-            <span>{{ event.header|safe }}</span>
-            <span class="when">{{ g.age(event.created) }}</span>
-
             <p><a href="{{ event.url }}">{{ event.title }}</a></p>
+            <span class="info">{{ event.header|safe }}</span>
+            <span class="when">{{ g.age(event.created) }}</span>
           </div>
           <div class="clear"></div>
         </div>

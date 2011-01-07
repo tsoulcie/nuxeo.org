@@ -129,7 +129,14 @@ h5, h6 {
 }
 
 .events .event .description p {
-  margin: 2px 0 5px 40px
+  margin: 2px 0 2px 40px
+}
+
+.events .event .info {
+  margin: 2px 0 5px 40px;
+  font-size: 90%;
+  font-style: italic;
+  color: #222;
 }
 
 .events .event .when {
