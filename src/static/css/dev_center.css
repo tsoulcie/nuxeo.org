@@ -120,8 +120,9 @@ h5, h6 {
 
 .events .event .type {
   float: left;
-  width: 40px;
-  vertical-align: top
+  width: 32px;
+  vertical-align: top;
+  margin-top: 2px;
 }
 
 .events .event .description {
@@ -129,14 +130,14 @@ h5, h6 {
 }
 
 .events .event .description p {
-  margin: 2px 0 2px 40px
+  margin: 2px 0 2px 32px
 }
 
 .events .event .info {
-  margin: 2px 0 5px 40px;
+  margin: 2px 0 5px 32px;
   font-size: 90%;
   font-style: italic;
-  color: #222;
+  color: #333;
 }
 
 .events .event .when {

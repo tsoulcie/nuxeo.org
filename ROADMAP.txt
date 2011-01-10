@@ -1,6 +1,26 @@
 TODO
 ====
 
+V. 0.3
+------
+
+- StackOverflow <http://stackoverflow.com/search?tab=newest&q=nuxeo>
+- Archives
+- Fix twitterfeed notifs
+- "New since last visit"
+- mod_wsgi deployment
+- Better diffs for Confluence (ˆ la wikipedia)
+
+V. 0.4
+------
+
+- User profiles (w/ photo...)
+- Search (federated?)
+- Twitter notifications (currently done by twitterfeed).
+
+DONE
+====
+
 V. 0.2
 ------
 
@@ -11,22 +31,6 @@ Focus: add a few goodies.
 + Better parsing of the events
 + template inheritance (needed for archive and user profiles)
 + User activities
-
-- Archives
-- Fix twitterfeed notifs
-- "New since last visit"
-- mod_wsgi deployment
-- Better diffs for Confluence (ˆ la wikipedia)
-
-V. 0.3
-------
-
-- User profiles (w/ photo...)
-- Search (federated?)
-- Twitter notifications (currently done by twitterfeed).
-
-DONE
-====
 
 V. 0.1
 ------
