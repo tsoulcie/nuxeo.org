@@ -39,7 +39,20 @@ def home():
         visits = 0
     is_newbie = visits < 3
 
-    events = get_events()
+    events = get_events(max_events=3*MAX_EVENTS)
+
+    filtered_events = []
+    already_seen = {}
+    for e in events:
+        key = e.title + "::" + e.author
+        if not already_seen.has_key(key):
+            filtered_events.append(e)
+        already_seen[key] = None
+    if len(filtered_events) > MAX_EVENTS:
+        events = filtered_events[0:MAX_EVENTS]
+    else:
+        events = filtered_events
+
     response = make_response(render_template("home.html", events=events, is_newbie=is_newbie))
 
     response.set_cookie('visits', visits, 10*YEAR)
@@ -78,11 +91,11 @@ def feed_debug():
 
 # Utility functions
 
-def get_events(user=None):
+def get_events(user=None, max_events=MAX_EVENTS):
     query = g.session.query(Event)
     if user:
         query = query.filter(Event.author == user)
-    events = query.order_by(Event.created.desc()).limit(MAX_EVENTS)
+    events = query.order_by(Event.created.desc()).limit(max_events)
     return events
 
 
