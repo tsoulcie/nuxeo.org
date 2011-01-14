@@ -1,9 +1,11 @@
 #!env/bin/python
+import math
 
 import time
 from datetime import datetime
 
 from flask import *
+import plugins
 from werkzeug.contrib.atom import AtomFeed
 
 from models import Event, Session
@@ -13,7 +15,7 @@ from models import Event, Session
 MAX_EVENTS = 20
 
 # Real constants
-MINUTE = 60
+MINUTE = 60.0
 HOUR = 60*MINUTE
 DAY = 24*HOUR
 MONTH = 30*DAY
@@ -39,19 +41,8 @@ def home():
         visits = 0
     is_newbie = visits < 3
 
-    events = get_events(max_events=3*MAX_EVENTS)
-
-    filtered_events = []
-    already_seen = {}
-    for e in events:
-        key = e.title + "::" + e.author
-        if not already_seen.has_key(key):
-            filtered_events.append(e)
-        already_seen[key] = None
-    if len(filtered_events) > MAX_EVENTS:
-        events = filtered_events[0:MAX_EVENTS]
-    else:
-        events = filtered_events
+    events = get_events(max_events=10*MAX_EVENTS)
+    events = filter_events(events)
 
     response = make_response(render_template("home.html", events=events, is_newbie=is_newbie))
 
@@ -96,6 +87,27 @@ def get_events(user=None, max_events=MAX_EVENTS):
     if user:
         query = query.filter(Event.author == user)
     events = query.order_by(Event.created.desc()).limit(max_events)
+    print events
+    return events[:]
+
+def filter_events(events):
+    already_seen = {}
+    now = int(time.time())
+    for e in events:
+        half_life = plugins.get_half_life_for(e)
+        decay = math.exp(-(now - e.created) / (DAY * half_life))
+        #key = e.title + "::" + e.author
+        title = e.title.lower()
+        while title.startswith("re: "):
+            title = title[4:]
+        key = title
+        if already_seen.has_key(key):
+            decay = 0
+        already_seen[key] = None
+        e.decay = decay
+    events.sort(lambda x, y: -cmp(x.decay, y.decay))
+    events = events[0:MAX_EVENTS]
+    events.sort(lambda x, y: -cmp(x.created, y.created))
     return events
 
 

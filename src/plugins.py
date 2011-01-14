@@ -69,6 +69,7 @@ BLOG_AUTHORS = {
 class Blogs(Feed):
     type = "blogpost"
     feed_url = "http://blogs.nuxeo.com/atom.xml"
+    half_life = 5
 
     def get_header(self, event):
         return 'New blog post, by <a href="/user/%s">%s</a>' % (
@@ -79,6 +80,7 @@ class Blogs(Feed):
 class CorpNews(Feed):
     type = "news"
     feed_url = "http://www.nuxeo.com/nxc/rssfeed/news"
+    half_life = 5
 
     def post_init(self, event, entry):
         event.author = "Nuxeo Corp"
@@ -91,6 +93,7 @@ class CorpNews(Feed):
 class Buzz(Feed):
     type = "buzz"
     feed_url = "http://www.nuxeo.com/en/rss/feed/buzz"
+    half_life = 3
 
     def post_init(self, event, entry):
         event.author = "Nuxeo Corp"
@@ -102,10 +105,11 @@ class Buzz(Feed):
 
 class Forum(Feed):
     type = "forum"
-    feed_url = "http://forum.nuxeo.org/feed.php?mode=m&l=1&basic=1"
+    feed_url = "http://forum.nuxeo.com/feed.php?mode=m&l=1&basic=1"
+    half_life = 0.5
 
     def post_init(self, event, entry):
-        m = re.match(r"http://forum.nuxeo.org/\./mv/msg/([0-9]+)/([0-9]+)", event.url)
+        m = re.match(r"http://forum.nuxeo.com/\./mv/msg/([0-9]+)/([0-9]+)", event.url)
         tid = int(m.group(1))
         mid = int(m.group(2))
         event.url = "http://forum.nuxeo.org/?t=msg&th=%d&goto=%d&#msg_%d" % (tid, mid, mid)
@@ -125,6 +129,8 @@ class Documentation(Feed):
     feed_url = "https://doc.nuxeo.com/spaces/createrssfeed.action?spaces=conf_all" + \
         "&types=page&types=comment&types=blogpost&types=mail&types=attachment" + \
         "&maxResults=15&publicFeed=true"
+    half_life = 0.5
+
 
     def get_header(self, event):
         return 'Documentation change, by <a href="/user/%s">%s</a>' % (
@@ -135,6 +141,7 @@ class Documentation(Feed):
 class Jira(Feed):
     type = "jira"
     feed_url = "http://jira.nuxeo.org/sr/jira.issueviews:searchrequest-rss/10915/SearchRequest-10915.xml?tempMax=10"
+    half_life = 0.5
 
     def post_init(self, event, entry):
         m = re.search(r"Created: (.*?)\s*&nbsp;Updated: ([^\s]*)", event.content)
@@ -167,4 +174,11 @@ def get_header_for(event):
     for source in all_sources:
         if source.type == type:
             return source.get_header(event)
+    raise "Unknown source"
+
+def get_half_life_for(event):
+    type = event.type.split("/")[0]
+    for source in all_sources:
+        if source.type == type:
+            return source.half_life
     raise "Unknown source"
