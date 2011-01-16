@@ -302,3 +302,24 @@ input.button:hover, input.button:hover {
   color: #000
 }
 
+/* Social engagement */
+.social img {
+  float: left;
+}
+
+.social span.count {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.social span.cta {
+  font-size: 12px;
+}
+
+.social li {
+  padding: 6px 0;
+}
+
+.social a {
+  color: #333;
+}

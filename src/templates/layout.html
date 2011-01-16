@@ -63,16 +63,10 @@
 
   <div class="externalLinks">
     <ul>
-      <li class="active"><a onclick="_gaq.push(['_link', 'http://community.nuxeo.com/']); return false;"
-             href="http://community.nuxeo.com/">Home</a></li>
-      <li><a onclick="_gaq.push(['_link', 'http://forum.nuxeo.com/']); return false;"
-             href="http://forum.nuxeo.com/">Forums</a>
-      </li>
-      <li><a onclick="_gaq.push(['_link', 'http://doc.nuxeo.com/']); return false;"
-             href="http://doc.nuxeo.com/">Documentation</a>
-      </li>
-      <li><a onclick="_gaq.push(['_link', 'http://blogs.nuxeo.com/']); return false;"
-             href="http://blogs.nuxeo.com/">Blogs</a></li>
+      <li class="active"><a href="http://community.nuxeo.com/">Home</a></li>
+      <li><a href="http://forum.nuxeo.com/">Forums</a></li>
+      <li><a href="http://doc.nuxeo.com/">Documentation</a></li>
+      <li><a href="http://blogs.nuxeo.com/">Blogs</a></li>
     </ul>
     <ul class="corp">
       <li><a href="http://nuxeo.com/">Nuxeo.com</a></li>
@@ -103,18 +97,30 @@
     {% endif %}
 
     <div class="subscribe">
-      <h3>Stay Updated</h3>
+      <h3>Join the Conversation</h3>
 
-      <div class="list">
-        <span>
-          <a target="_blank" href="/rss"><img src="/media/icons/rss.png" alt="Subscribe to Feed"/></a>
-        </span>
-        <span>
-          <a target="_blank" href="http://twitter.com/nuxeoorg"><img src="/media/icons/twitter.png" alt="Follow us on nuxeoorg"/></a>
-        </span>
-        <span>
-          <a target="_blank" href="http://www.linkedin.com/groupsDirectory?itemaction=mclk&amp;anetid=43314&amp;impid=&amp;pgkey=anet_search_results&amp;actpref=anetsrch_name&amp;trk=anetsrch_name&amp;goback=%2Egdr_1288215250735_1"><img src="/media/icons/linkedin.png" alt="Nuxeo LinkedIn"/></a>
-        </span>
+      <div class="list social">
+        <ul>
+          <li>
+            <a target="_blank" href="/rss" onclick="_gaq.push(['_trackEvent', 'RSS', 'subscribe'])">
+              <img src="/media/icons/rss.png" alt="Subscribe to Feed"/>
+              <span class="count">1436 subscribers</span><br/>
+              <span class="cta">Subscribe via RSS</span></a>
+          </li>
+          <li>
+            <a target="_blank" href="http://twitter.com/nuxeo" onclick="_gaq.push(['_trackEvent', 'Twitter', 'subscribe'])">
+              <img src="/media/icons/twitter.png" alt="Follow @nuxeo on Twitter"/>
+              <span class="count">622 followers</span><br/>
+              <span class="cta">Follow @nuxeo on Twitter</span></a>
+          </li>
+          <li>
+            <a target="_blank" onclick="_gaq.push(['_trackEvent', 'LinkedIn', 'subscribe'])"
+               href="http://www.linkedin.com/groupsDirectory?itemaction=mclk&amp;anetid=43314&amp;impid=&amp;pgkey=anet_search_results&amp;actpref=anetsrch_name&amp;trk=anetsrch_name&amp;goback=%2Egdr_1288215250735_1">
+              <img src="/media/icons/linkedin.png" alt="Nuxeo LinkedIn"/>
+              <span class="count">481 members</span><br/>
+              <span class="cta">Join the Nuxeo group on LinkedIn</span></a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -300,6 +306,11 @@
     </div>
     <div class="Contact">
       ©2010-2011 <span class="nuxeoLogo">nuxeo</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <small>Free icons from
+        <a href="http://www.wpzoom.com/wpzoom/500-free-icons-wpzoom-social-networking-icon-set/">WPZoom</a>
+        and <a href="http://www.famfamfam.com/">FamFamFam</a>
+      </small>
     </div>
   </div>
 </div>
