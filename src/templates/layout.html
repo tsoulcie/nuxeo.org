@@ -4,12 +4,18 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Nuxeo Community Center</title>
+
+  <!-- for iPhone users -->
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <link rel="apple-touch-icon" href="/media/icons/iphone-icon.png"/>
+  <!--link rel="apple-touch-startup-image" href="startup.png"/-->
+
   <link rel="icon" type="image/png"
         href="http://www.nuxeo.com/var/storage/community/favicon.png">
   <link rel="stylesheet"
         href="http://www.nuxeo.com/var/storage/community/community_common.css"
         type="text/css" media="screen"/>
-  <link rel="stylesheet" href="/media/css/dev_center.css" type="text/css"
+  <link rel="stylesheet" href="/media/css/style.css" type="text/css"
         media="screen">
   <link type="application/rss+xml" rel="alternate" href="/rss" title="Nuxeo Community Feed" />
 
@@ -21,7 +27,8 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $(".tweet").tweet({
-        username: ["sfermigier", "ebarroca", "ogrisel", "efge", "janezupan", "nuxeo", "nuxeodam", "jcarsique"],
+        username: ["sfermigier", "ebarroca", "ogrisel", "efge", "janezupan", "nuxeo", "nuxeodam",
+          "arussel", "jcarsique"],
         join_text: "auto",
         avatar_size: 32,
         count: 6,
@@ -30,6 +37,19 @@
     });
   </script>
   <link href="/media/tweet/jquery.tweet.css" media="all" rel="stylesheet" type="text/css"/>
+
+  <script type="text/javascript">
+    $(function() {
+      $.ajax({
+        url: 'http://api.twitter.com/1/users/show.json',
+        data: {screen_name: 'nuxeo'},
+        dataType: 'jsonp',
+        success: function(data) {
+          $('#followers').html(data.followers_count);
+        }
+      });
+    });
+  </script>
 
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -102,19 +122,22 @@
       <div class="list social">
         <ul>
           <li>
-            <a target="_blank" href="/rss" onclick="_gaq.push(['_trackEvent', 'RSS', 'subscribe'])">
+            <a target="_blank" href="/rss"
+               onclick="_gaq.push(['_trackEvent', 'Social', 'RSS', 'Go to RSS subscription'])">
               <img src="/media/icons/rss.png" alt="Subscribe to Feed"/>
               <span class="count">1436 subscribers</span><br/>
               <span class="cta">Subscribe via RSS</span></a>
           </li>
           <li>
-            <a target="_blank" href="http://twitter.com/nuxeo" onclick="_gaq.push(['_trackEvent', 'Twitter', 'subscribe'])">
+            <a target="_blank" href="http://twitter.com/nuxeo"
+               onclick="_gaq.push(['_trackEvent', 'Social', 'Twitter', 'Go to Twitter page'])">
               <img src="/media/icons/twitter.png" alt="Follow @nuxeo on Twitter"/>
-              <span class="count">622 followers</span><br/>
+              <span class="count"><span id="followers"></span> followers</span><br/>
               <span class="cta">Follow @nuxeo on Twitter</span></a>
           </li>
           <li>
-            <a target="_blank" onclick="_gaq.push(['_trackEvent', 'LinkedIn', 'subscribe'])"
+            <a target="_blank"
+               onclick="_gaq.push(['_trackEvent', 'Social', 'LinkedIn', 'Go to LinkedIn group page'])"
                href="http://www.linkedin.com/groupsDirectory?itemaction=mclk&amp;anetid=43314&amp;impid=&amp;pgkey=anet_search_results&amp;actpref=anetsrch_name&amp;trk=anetsrch_name&amp;goback=%2Egdr_1288215250735_1">
               <img src="/media/icons/linkedin.png" alt="Nuxeo LinkedIn"/>
               <span class="count">481 members</span><br/>
@@ -290,15 +313,18 @@
       <ul>
         <li><h6>Follow us</h6>
           <ul>
-            <li><a href="http://twitter.com/nuxeo/"><span
-                    class="twitter">twitter</span> /nuxeo</a></li>
+            <li><a href="http://twitter.com/nuxeo/"
+                   onclick="_gaq.push(['_trackEvent', 'Social', 'Twitter', 'Go to Twitter page'])"
+                ><span class="twitter">twitter</span> /nuxeo</a></li>
             <li>
               <a href="http://www.linkedin.com/groupsDirectory?itemaction=mclk&amp;anetid=43314&amp;impid=&amp;pgkey=anet_search_results&amp;actpref=anetsrch_name&amp;trk=anetsrch_name&amp;goback=%2Egdr_1288215250735_1"
-                      ><span class="linkedIn">linkedIn</span> /Nuxeo
+                 onclick="_gaq.push(['_trackEvent', 'Social', 'LinkedIn', 'Go to LinkedIn group page'])"
+                ><span class="linkedIn">linkedIn</span> /Nuxeo
                 Community</a></li>
             <li>
-              <a href="http://www.facebook.com/group.php?gid=5568495138">
-                <span class="facebook">facebook</span> /Nuxeo
+              <a href="http://www.facebook.com/group.php?gid=5568495138"
+                 onclick="_gaq.push(['_trackEvent', 'Social', 'FaceBook', 'Go to FaceBook group page'])"
+                ><span class="facebook">facebook</span> /Nuxeo
                 Users</a></li>
           </ul>
         </li>
