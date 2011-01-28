@@ -12,7 +12,7 @@ from models import Event, Session
 
 
 # Constants (might go into a config file)
-MAX_EVENTS = 20
+MAX_EVENTS = 25
 
 # Real constants
 MINUTE = 60.0
