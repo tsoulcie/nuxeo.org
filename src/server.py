@@ -29,6 +29,9 @@ app = Flask(__name__, static_path='/media')
 @app.before_request
 def connect_db():
     g.session = Session()
+
+@app.before_request
+def register_helpers():
     g.age = age
 
 # REST endpoints
@@ -53,6 +56,13 @@ def home():
 def user(username):
     events = get_events(user=username)
     response = make_response(render_template("user.html", username=username, events=events))
+    return response
+
+@app.route('/archive/<year>/<month>/<day>')
+def user(year, month, day):
+    date = datetime(int(year), int(month), int(day))
+    events = get_events(date=date)
+    response = make_response(render_template("archive.html", date=date, events=events))
     return response
 
 
@@ -82,10 +92,13 @@ def feed_debug():
 
 # Utility functions
 
-def get_events(user=None, max_events=MAX_EVENTS):
+def get_events(user=None, date=None, max_events=MAX_EVENTS):
     query = g.session.query(Event)
     if user:
         query = query.filter(Event.author == user)
+    if date:
+        ts = time.mktime(date.timetuple())
+        query = query.filter(Event.created >= ts).filter(Event.created < ts+DAY)
     events = query.order_by(Event.created.desc()).limit(max_events)
     print events
     return events[:]
@@ -115,24 +128,27 @@ def age(t):
     now = int(time.time())
     dt = now - t
     if dt < MINUTE:
-        return "%d seconds ago" % dt
-    if dt < 2*MINUTE:
-        return "about 1 minute ago"
-    if dt < HOUR:
-        return "%d minutes ago" % (dt/MINUTE)
-    if dt < 2*HOUR:
-        return "about 1 hour ago"
-    if dt < DAY:
-        return "about %d hours ago" % (dt/HOUR)
-    if dt < 2*DAY:
-        return "yesterday"
-    if dt < MONTH:
-        return "about %d days ago" % (dt/DAY)
-    if dt < 2*MONTH:
-        return "last month"
-    if dt < YEAR:
-        return "about %d months ago" % (dt/MONTH)
-    return "%d years ago" % (dt/YEAR)
+        age = "%d seconds ago" % dt
+    elif dt < 2*MINUTE:
+        age = "about 1 minute ago"
+    elif dt < HOUR:
+        age = "%d minutes ago" % (dt/MINUTE)
+    elif dt < 2*HOUR:
+        age = "about 1 hour ago"
+    elif dt < DAY:
+        age = "about %d hours ago" % (dt/HOUR)
+    elif dt < 2*DAY:
+        age = "yesterday"
+    elif dt < MONTH:
+        age = "about %d days ago" % (dt/DAY)
+    elif dt < 2*MONTH:
+        age = "last month"
+    elif dt < YEAR:
+        age = "about %d months ago" % (dt/MONTH)
+    else:
+        age = "%d years ago" % (dt/YEAR)
+    date = datetime.utcfromtimestamp(t)
+    return '<a href="/archive/%d/%d/%d">%s</a>' % (date.year, date.month, date.day, age)
 
 
 if __name__ == '__main__':

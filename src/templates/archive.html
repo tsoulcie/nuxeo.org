@@ -4,7 +4,7 @@
 
 {% block main %}
     <div class="feedsBlock">
-      <h2>Activity log for user {{ username }} </h2>
+      <h2>Activity log for {{ date.strftime("%Y/%m/%d") }}</h2>
 
       <div class="events">
         {% for event in events %}

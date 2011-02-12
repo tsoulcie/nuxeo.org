@@ -140,7 +140,7 @@ h5, h6 {
   color: #333;
 }
 
-.events .event .when {
+.events .event .when a {
   font-size: 80%;
   color: #aaa;
   float: right
