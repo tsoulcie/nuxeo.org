@@ -59,7 +59,7 @@ def user(username):
     return response
 
 @app.route('/archive/<year>/<month>/<day>')
-def user(year, month, day):
+def archive(year, month, day):
     date = datetime(int(year), int(month), int(day))
     events = get_events(date=date)
     response = make_response(render_template("archive.html", date=date, events=events))
