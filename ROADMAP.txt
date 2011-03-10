@@ -4,8 +4,9 @@ TODO
 V. 0.3
 ------
 
++ Archives
+
 - StackOverflow <http://stackoverflow.com/search?tab=newest&q=nuxeo>
-- Archives
 - Fix twitterfeed notifs
 - "New since last visit"
 - mod_wsgi deployment
