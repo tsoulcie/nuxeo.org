@@ -1,5 +1,12 @@
 /*--- CSS - Nuxeo Dev Center - lk@nuxeo.com - December 2010 ---*/
 
+@font-face {
+  font-family: 'Amaranth';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Amaranth'), url('https://themes.googleusercontent.com/static/fonts/amaranth/v1/RvdVaxHTnYbJDko8dLi4znYhjbSpvc47ee6xR_80Hnw.woff') format('woff');
+}
+
 /* Generic styles */
 
 body {
@@ -324,4 +331,76 @@ input.button:hover, input.button:hover {
 
 .social a {
   color: #333;
+}
+
+
+#feedback {
+  padding-bottom: 0.5em;
+  background-color: yellow;
+    font-family: Amaranth,'Lucida Grande',sans-serif;
+    font-size: 17px;
+    padding: 5px;
+    position: fixed;
+    right: -42px;
+    bottom: 55%;
+    border:2px solid #fff;
+    border-bottom: none;
+    box-shadow: 0 0 3px #ccc;
+  border-radius: 5px 5px 0 0;
+  -webkit-border-radius:  5px 5px 0 0;
+  -moz-border-radius:  5px 5px 0 0;  
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg);
+  -o-transform:rotate(-90deg);
+	
+  /* SVG fallback(Opera 11.10-, IE9) */
+background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2JhKDI1NSwyNTUsMjU1LDEpOyIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOnJnYmEoMjIxLDIzOCwyNTUsMSk7IiAvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IGZpbGw9InVybCgjZ3JhZGllbnQpIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIiAvPjwvc3ZnPg==);
+
+/* Opera 11.10+ */
+background: -o-linear-gradient(top, rgba(255,255,255,1), rgba(221,238,255,1));
+
+/* Firefox 3.6+ */
+background: -moz-linear-gradient(top, rgba(255,255,255,1), rgba(221,238,255,1));
+
+/* Chrome 7+ & Safari 5.03+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255,255,255,1)), color-stop(1, rgba(221,238,255,1)));
+
+/* IE5.5 - IE7 */
+filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFFFF,EndColorStr=#FFDDEEFF);
+
+/* IE8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFFFF,EndColorStr=#FFDDEEFF)";
+  opacity: 0.8;
+}
+
+#feedback a {
+  color:#454545;
+}
+
+#feedback:hover {
+ opacity: 1;
+ /* SVG fallback(Opera 11.10-, IE9) */
+background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjpyZ2JhKDYzLDEyNiwyNTEsMSk7IiAvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6cmdiYSg0MywxMDMsMjIyLDEpOyIgLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCBmaWxsPSJ1cmwoI2dyYWRpZW50KSIgaGVpZ2h0PSIxMDAlIiB3aWR0aD0iMTAwJSIgLz48L3N2Zz4=);
+
+/* Opera 11.10+ */
+background: -o-linear-gradient(top, rgba(63,126,251,1), rgba(43,103,222,1));
+
+/* Firefox 3.6+ */
+background: -moz-linear-gradient(top, rgba(63,126,251,1), rgba(43,103,222,1));
+
+/* Chrome 7+ & Safari 5.03+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(63,126,251,1)), color-stop(1, rgba(43,103,222,1)));
+
+/* IE5.5 - IE7 */
+filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FF3F7EFB,EndColorStr=#FF2B67DE);
+
+/* IE8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FF3F7EFB,EndColorStr=#FF2B67DE)";
+
+}
+
+#feedback:hover a, 
+#feedback a:hover  {
+  color:white;
+  text-decoration: none;
 }
