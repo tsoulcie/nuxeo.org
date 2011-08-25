@@ -138,6 +138,18 @@ class Documentation(Feed):
 
 #
 
+class Answers(Feed):
+    type = "qa"
+    feed_url = "http://answers.nuxeo.com/feeds/rss"
+    half_life = 0.5
+
+
+    def get_header(self, event):
+        return 'New question on <em>Answers</em>, by <a href="/user/%s">%s</a>' % (
+            quote(event.author.encode("utf8")), escape(event.author))
+
+#
+
 class Jira(Feed):
     type = "jira"
     feed_url = "http://jira.nuxeo.org/sr/jira.issueviews:searchrequest-rss/10915/SearchRequest-10915.xml?tempMax=10"
@@ -167,7 +179,8 @@ class Jira(Feed):
 
 # Poor man's plugin registration
 
-all_sources = [Blogs(), Forum(), CorpNews(), Buzz(), Jira(), Documentation()]
+all_sources = [Blogs(), Forum(), CorpNews(), Buzz(), Jira(), Documentation(),
+    Answers()]
 
 def get_header_for(event):
     type = event.type.split("/")[0]
